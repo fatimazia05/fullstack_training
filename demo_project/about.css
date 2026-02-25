@@ -1,0 +1,52 @@
+body {
+    margin: 0;
+    font-family: Arial;
+    background: #f3f3f3;
+}
+
+.navbar {
+    background: #131921;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+}
+
+.nav-logo img {
+    width: 100px;
+}
+
+.nav-search input {
+    padding: 8px;
+    width: 300px;
+    border: none;
+}
+
+.nav-search button {
+    padding: 8px;
+    background: #febd69;
+    border: none;
+}
+
+.nav-menu a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+}
+
+.about-content {
+    padding: 40px;
+    text-align: center;
+}
+
+.about-content img {
+    width: 60%;
+    margin: 20px 0;
+}
+
+.footer {
+    background: #131921;
+    color: white;
+    text-align: center;
+    padding: 15px;
+}
