@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tailwind To-Do List</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+
+    <div class="bg-white p-8 rounded-xl shadow-lg w-full max-w-md">
+        <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">My Tasks</h2>
+
+        <div class="flex gap-2 mb-6">
+            <input type="text" id="taskBox" placeholder="Write a task..." 
+                class="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all">
+            
+            <button id="addTask" 
+                class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded-lg transition-colors">
+                Add
+            </button>
+        </div>
+
+        <ul id="taskList" class="space-y-3">
+            </ul>
+    </div>
+
+    <script>
+        const taskBox = document.getElementById("taskBox");
+        const addTaskBtn = document.getElementById("addTask");
+        const taskList = document.getElementById("taskList");
+
+        addTaskBtn.addEventListener("click", function(){
+            let taskText = taskBox.value.trim();
+
+            if(taskText.length > 0){
+                let newTask = document.createElement("li");
+                
+                
+                
+                newTask.className = "bg-gray-50 border border-gray-200 p-3 rounded-lg cursor-pointer hover:bg-gray-100 transition-all text-gray-700";
+                newTask.innerText = taskText;
+
+                taskList.appendChild(newTask);
+                taskBox.value = "";
+            }
+        });
+
+        taskList.addEventListener("click", function(event){
+            if(event.target.tagName === "LI"){
+                
+                event.target.classList.toggle("line-through");
+                event.target.classList.toggle("opacity-50");
+            }
+        });
+    </script>
+
+</body>
+</html>
