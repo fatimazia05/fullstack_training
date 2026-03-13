@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DebateArena Pro</title>
+
+<style>
+
+body{
+font-family: Arial;
+background:#121212;
+color:white;
+text-align:center;
+padding:40px;
+}
+
+input{
+padding:10px;
+margin:10px;
+width:200px;
+}
+
+button{
+padding:10px 20px;
+background:#ff9800;
+border:none;
+color:white;
+cursor:pointer;
+}
+
+#debate{
+margin-top:30px;
+background:white;
+color:black;
+padding:20px;
+width:70%;
+margin:auto;
+border-radius:10px;
+}
+
+.avatar{
+width:100px;
+border-radius:50%;
+transition: transform 0.3s;
+}
+
+.talking{
+transform: scale(1.1);
+}
+
+.leaders{
+display:flex;
+justify-content:center;
+gap:80px;
+margin-bottom:20px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>DebateArena Pro 🎤🤖</h1>
+
+<input id="leader1" placeholder="Leader 1">
+<input id="leader2" placeholder="Leader 2">
+
+<br>
+
+<input id="topic" placeholder="Debate Topic">
+
+<br><br>
+
+<button onclick="startDebate()">Start Debate</button>
+
+<div class="leaders">
+
+<div>
+<img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" id="img1" class="avatar">
+<p id="name1"></p>
+</div>
+
+<div>
+<img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" id="img2" class="avatar">
+<p id="name2"></p>
+</div>
+
+</div>
+
+<div id="debate"></div>
+
+<script>
+
+let voices=[]
+
+speechSynthesis.onvoiceschanged=()=>{
+voices=speechSynthesis.getVoices()
+}
+
+function speak(text,voiceIndex,img){
+
+let speech=new SpeechSynthesisUtterance(text)
+
+speech.voice=voices[voiceIndex]
+speech.rate=1
+
+let avatar=document.getElementById(img)
+avatar.classList.add("talking")
+
+speech.onend=()=>{
+avatar.classList.remove("talking")
+}
+
+speechSynthesis.speak(speech)
+
+}
+
+function startDebate(){
+
+let leader1=document.getElementById("leader1").value
+let leader2=document.getElementById("leader2").value
+let topic=document.getElementById("topic").value
+
+document.getElementById("name1").innerText=leader1
+document.getElementById("name2").innerText=leader2
+
+let line1=leader1+" says: "+topic+" needs immediate government action."
+let line2=leader2+" says: "+topic+" should be solved with balanced policies."
+
+document.getElementById("debate").innerHTML=
+"<b>"+line1+"</b><br><br><b>"+line2+"</b>"
+
+speak(line1,0,"img1")
+
+setTimeout(()=>{
+speak(line2,1,"img2")
+},4000)
+
+}
+
+</script>
+
+</body>
+</html>
